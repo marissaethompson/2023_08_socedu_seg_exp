@@ -9,7 +9,7 @@
 * Load Data
 ******************************
 
-use "${dir}/data/clean/data_analytic_${date}.dta" , clear
+use "${dir}/data/data_analytic_${date}.dta" , clear
 
 ********************************************************************************
 * Descriptive Statistics - Table Generation 
@@ -17,7 +17,7 @@ use "${dir}/data/clean/data_analytic_${date}.dta" , clear
 
 gen sample = 0
 
-append using "${dir}/data/clean/data_analytic_${date}.dta"
+append using "${dir}/data/data_analytic_${date}.dta"
 
 replace sample = control + 1 if sample==.
 
@@ -42,7 +42,7 @@ desctable i.female age i.hispanic_cat i.race hhi_cont_1000 i.ed_cat i.party i.re
 		  sesavgall seg_guess seg_diff attitude_std policy_std minutes_additional tax ///
 		  , stats(mean sd) ///
 		  group(sample) ///
-		  filename("table1_descriptive_$date") ///
+		  filename("tab1") ///
 		  title(" ") ///
 		  notes(Observations = `n_full', `n_treat', `n_control') ///
 		  notesize(11)

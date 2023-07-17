@@ -1,6 +1,4 @@
-
-***************************************************************************
-***************************************************************************
+**************************************************************************
 * PRINCIPAL COMPONENT GENERATION
 ***************************************************************************
 
@@ -8,7 +6,7 @@
 * Load Data
 ******************************
 
-use "${dir}/data/clean/lucid_segregation_survey.dta" , clear
+use "${dir}/data/lucid_segregation_survey.dta" , clear
 
 ***************************************************************************	 
 
@@ -68,7 +66,7 @@ preserve
 		display "e(Ev)[`i',1]/4"
 	}
 
-	esttab using "${table}/pca_$date.csv", ///
+	esttab using "${table}/tabA2.csv", ///
 		   label plain append ///
 		   cells("L[Comp1](t fmt(2)) L[Comp2](t) L[Comp3](t) L[Comp4](t) L[Comp5](t)") ///	
 		   mtitle("Policy Index") ///
@@ -96,11 +94,11 @@ rename *_pc *_std
 
 preserve
 	keep if analytic_sample==0
-	save "${dir}/data/clean/data_analytic_${date}.dta", replace 
+	save "${dir}/data/data_analytic_${date}.dta", replace 
 restore
 
 preserve
 	keep if analytic_sample==1
-	save "${dir}/data/clean/data_full_${date}.dta", replace 
+	save "${dir}/data/data_full_${date}.dta", replace 
 restore
 

@@ -1,5 +1,5 @@
 
-use "${dir}/data/clean/data_analytic_${date}.dta" , clear
+use "${dir}/data/data_analytic_${date}.dta" , clear
 
 ***********************************************
 * Overall Treatment Effects (Analytic Sample)
@@ -30,14 +30,14 @@ eststo: reg tax i.treat i.female i.race i.hispanic_cat age log_inc ///
 						 log_enrl ncharters ppexp_tot pprev_tot sesavgall, ///
 						 robust 
 
-esttab using "${table}/treatment_effects_$date.csv", nobaselevels obslast ar2 se nogaps label noomitted replace compress star(* 0.05 ** 0.01 *** 0.001) b(%9.2f)  keep(1.treat)
+esttab using "${table}/tab4.csv", nobaselevels obslast ar2 se nogaps label noomitted replace compress star(* 0.05 ** 0.01 *** 0.001) b(%9.2f)  keep(1.treat)
 
 ********************************************************************************
 * Overall Treatment Effects (Full Sample)
 ********************************************************************************
  
 preserve
-	use "${dir}/data/clean/data_full_$date.dta", clear 
+	use "${dir}/data/data_full_$date.dta", clear 
 
 	***** Treatment effects on full sample (for appendix) 
 
@@ -61,7 +61,7 @@ preserve
 							 log_inc i.ed_cat i.party i.region /// 
 							 , robust 
 
-	esttab using "${table}/treatment_effects_fullsample_$date.csv", nobaselevels obslast ar2 se nogaps label noomitted replace compress star(* 0.05 ** 0.01 *** 0.001) b(%9.2f) keep(1.treat)
+	esttab using "${table}/tabA6.csv", nobaselevels obslast ar2 se nogaps label noomitted replace compress star(* 0.05 ** 0.01 *** 0.001) b(%9.2f) keep(1.treat)
 restore
 
 ***********************************************
@@ -80,7 +80,7 @@ eststo: reg dich_tax i.treat i.female i.race i.hispanic_cat age log_inc ///
 						 log_enrl ncharters ppexp_tot pprev_tot sesavgall, ///
 						 robust 
 
-esttab using "${table}/dichotomous_travel_tax_$date.csv", nobaselevels obslast ar2 se nogaps label noomitted replace compress star(* 0.05 ** 0.01 *** 0.001) b(%9.2f) keep(1.treat)
+esttab using "${table}/tabA8.csv", nobaselevels obslast ar2 se nogaps label noomitted replace compress star(* 0.05 ** 0.01 *** 0.001) b(%9.2f) keep(1.treat)
 
 ***********************************************
 * Treatment Effects on Individual Policy Index Items
@@ -95,7 +95,7 @@ foreach var in policy_attendance policy_newschool policy_magnet policy_budget po
 				, robust	
 }
 
-esttab using "${table}/policy_item_treatment_effects_$date.csv" ///
+esttab using "${table}/tabA7.csv" ///
 	   , nobaselevels obslast ar2 se nogaps label noomitted replace compress ///
 	   star(* 0.05 ** 0.01 *** 0.001) ///
 	   b(%9.2f) ///
@@ -139,7 +139,7 @@ eststo: reg minutes_additional seg_over seg_under seg_over_treat seg_under_treat
 *eststo: reg tax seg_over seg_under seg_over_treat seg_under_treat, noc robust
 eststo: reg tax seg_over seg_under seg_over_treat seg_under_treat i.female i.race i.hispanic_cat age log_inc i.ed_cat i.party i.region perfrl log_enrl ncharters ppexp_tot pprev_tot sesavgall, noc robust
 
-esttab using "${table}/hetero_treatment_separate_$date.csv", ///
+esttab using "${table}/tab5.csv", ///
 		     nobaselevels noobs ar2 se nogaps label noomitted replace compress ///
 			 star(* 0.05 ** 0.01 *** 0.001) ///
 			 b(%9.2f) ///
@@ -162,7 +162,7 @@ eststo: reg minutes_additional treat seg_diff seg_diff_treat i.female i.race i.h
 *eststo: reg tax treat seg_diff seg_diff_treat, robust
 eststo: reg tax treat seg_diff seg_diff_treat i.female i.race i.hispanic_cat age log_inc i.ed_cat i.party i.region perfrl log_enrl ncharters ppexp_tot pprev_tot sesavgall, robust
 
-esttab using "${table}/hetero_treatment_separate_$date.csv", ///
+esttab using "${table}/tab5.csv", ///
 		     nobaselevels noobs ar2 se nogaps label noomitted nonumbers append compress ///
 			 star(* 0.05 ** 0.01 *** 0.001) ///
 			 b(%9.2f) ///
@@ -196,7 +196,6 @@ eststo: reg policy_std hhi_median low_inc high_inc_treat low_inc_treat ///
 	    i.female i.race i.hispanic_cat age log_inc i.ed_cat i.party i.region perfrl log_enrl ncharters ppexp_tot pprev_tot sesavgall, ///
 		noc robust
 
-		
 eststo: reg minutes_additional hhi_median low_inc high_inc_treat low_inc_treat ///
 	    i.female i.race i.hispanic_cat age log_inc i.ed_cat i.party i.region perfrl log_enrl ncharters ppexp_tot pprev_tot sesavgall, ///
 		noc robust
@@ -205,7 +204,7 @@ eststo: reg tax hhi_median low_inc high_inc_treat low_inc_treat ///
 	    i.female i.race i.hispanic_cat age log_inc i.ed_cat i.party i.region perfrl log_enrl ncharters ppexp_tot pprev_tot sesavgall, ///
 		noc robust
 
-esttab using "${table}/hetero_treatment_separate_$date.csv", ///
+esttab using "${table}/tab5.csv", ///
 			 nobaselevels noobs ar2 se nogaps label noomitted nonumbers  append compress ///
 			 star(* 0.05 ** 0.01 *** 0.001) ///
 			 b(%9.2f) ///
@@ -231,7 +230,7 @@ eststo: reg tax treat log_inc log_inc_treat ///
 	    i.female i.race i.hispanic_cat age log_inc i.ed_cat i.party i.region perfrl log_enrl ncharters ppexp_tot pprev_tot sesavgall, ///
 		robust		
 
-esttab using "${table}/hetero_treatment_separate_$date.csv" ///
+esttab using "${table}/tab5.csv" ///
 			 , nobaselevels obslast ar2 se nogaps label noomitted nonumbers append compress ///
 			 star(* 0.05 ** 0.01 *** 0.001) ///
 			 b(%9.2f) ///

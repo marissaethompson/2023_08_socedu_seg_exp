@@ -3,7 +3,9 @@
 
 * Title: My school district isn't segregated: Experimental evidence on the effect of information on parental preferences regarding school segregation
 * Authors: Marissa Thompson & Sam Trejo 
- ********************************************************************************
+* Journal: Sociology of Education
+* Date: 2023
+********************************************************************************
 
 ***********************************************************************************
 *** SETUP
@@ -18,16 +20,13 @@ pause on
 
 set scheme burd
 
-*set trace on
-*capture log close
-
 ***********************************************************************************
 *** SET DIRECTORY GLOBALS
 ***********************************************************************************
 
 ***set home folder
 if "`c(username)'"=="trejo" {
-	glob dir "C:\Users\trejo\Dropbox (Princeton)\seg_exp"
+	glob dir "C:\Users\trejo\Dropbox (Princeton)\Sam\Downloads\2023_08_socedu_seg_exp"
 	graph set window fontface "Calibri Light" 
 }
 
@@ -38,7 +37,7 @@ if "`c(username)'"=="marissathompson" {
 
 ***set files path globals
 global data "${dir}/data"
-global dofile "${dir}/dofiles"
+global dofile "${dir}/syntax"
 global table "${dir}/tables"
 global figure "${dir}/figures"
 
@@ -115,31 +114,20 @@ dis "$date"
 *** RUN DOFILES
 ***********************************************************************************
 
-do "$dofile/~data_clean.do" // our file that does initial cleaning (delete before posting)
-
-*** Create PCA Tables 
-	* Input: lucid_segregation_survey.dta
-	* Data Output: data_analytic_${date}.dta, data_full_${date}.dta
-	* Table Output:	pca_$date.csv (Table A2)			
-
+*** Create PCA Variables; Table A2	
 do "$dofile/A___pca_tabA2.do"
 
-*** Produce Table 1 
-	* Input: data_analytic_${date}.dta
-	* Output: table1_summarystatistics_$date (Table 1)	
+*** Summary Statistics; Table 1 
 do "$dofile/B___sumstat_tab1.do"
-
-*** Regression Results Tables 2 & 3
-	* Input: data_analytic_${date}.dta
-	* Output: control_attitudes_$date (Table 2); reg_guess_$date.csv (Table 3); do "$dofile/D_desc.do"
-
-*do "$dofile/C___desc_tab2_tab3.do"
 	
-*** Regression Results Tables 4 & 5
-	* Input: data_analytic_${date}.dta, data_full_${date}.dta
-	* Output: treatment_effects_$date (Table 4); hetero_treatment_separate_$date.csv (Table 5); treatment_effects_fullsample_$date.csv (Table A4); policy_item_treatment_effects_$date (Table A5)
+*** Descriptive Regressions; Tables 2 & 3
+do "$dofile/C___desc_tab2_tab3.do"
+	
+*** Treatment Effect Estimates; Tables 4, 5, A6, A7, & A8
+do "$dofile/D___effects_tab4_tab5_tabA6_tabA7_tabA8.do"
 
-do "$dofile/D___effects_tab4_tab5_tabA4_tabA5.do"
+?
+
 
 *** Produce Figure 3 (Coefficient Plots)
 	* Input: data_analytic_${date}.dta

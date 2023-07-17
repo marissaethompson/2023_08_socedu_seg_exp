@@ -1,7 +1,5 @@
 # 2023_08_socedu_seg_exp
 
-Data and code for 
-
 Authors: Marissa Thompson &amp; Sam Trejo
 
 Title: My school district isn't segregated: Experimental evidence on the effect of information on parental preferences regarding school segregation
@@ -25,18 +23,30 @@ Master script. Details on each of the file inputs and outputs can be found below
 
 Description of do files: 
 
-1. _MAIN.do
-	* Input: survey_exp_$date.dta
+1. ~MAIN.do
+	* Input: lucid_segregation_survey.dta
 	* Output: (runs all other do files, produces all tables and figures) 
 
-2. A__pca_tabA2.do 
-	* Input: survey_exp_$date.dta
-	* Data Output: survey_clean_$date.dta
-	* Table Output:	${table}/pca_$date.csv (Appendix Table)		
+2. A___pca_tabA2.do 
+	* Input: lucid_segregation_survey.dta
+	* Data Output: data_analytic_${date}.dta, data_full_${date}.dta
+	* Table Output:	tabA2.csv
 
-3. B_descriptive_tables.do
-	* Input: survey_clean_$date.dta
-	* Output: table1_descriptive_$date (Table 1)	
+3. B___sumstat_tab1.do
+	* Input: data_analytic_${date}.dta
+	* Output: tab1.xlsx
+
+4. C___desc_tab2_tab3
+	* Input: data_analytic_${date}.dta
+	* Output: tab2.csv, tab3.csv
+
+5. D___effects_tab4_tab5_tabA6_tabA7_tabA8
+	* Input: data_analytic_${date}.dta, data_full_${date}.dta
+	* Output: tab4.csv, tab5.csv, tabA6.csv, tabA7.csv, tabA8.csv 
+?
+
+
+
 
 4. C_coefficient_plots.do
 	* Input: survey_clean_$date.dta
