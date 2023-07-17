@@ -1,14 +1,9 @@
 ******************************************************************************** 
 * Main Do File 
 
-
-* Title: Experimental Evidence on Parental Preferences Regarding School Segregation
+* Title: My school district isn't segregated: Experimental evidence on the effect of information on parental preferences regarding school segregation
 * Authors: Marissa Thompson & Sam Trejo 
-* ReadMe file: _readme.txt
-* 
-* February 2023
-********************************************************************************
-
+ ********************************************************************************
 
 ***********************************************************************************
 *** SETUP
@@ -46,7 +41,6 @@ global data "${dir}/data"
 global dofile "${dir}/dofiles"
 global table "${dir}/tables"
 global figure "${dir}/figures"
-
 
 ***set color globals for figures
 global color1 ebblue
@@ -163,7 +157,6 @@ do "$dofile/F___vbar_fig4_figA4.do"
 do "$dofile/G___hbar_fig5.do"
 
 ?
-
 *** Produce Additional Appendix Tables
 	* Input: survey_clean_$date.dta
 	* Output: demo_table_$date.csv" (Appendix Table)

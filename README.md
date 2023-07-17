@@ -3,10 +3,12 @@
 Data and code for Thompson &amp; Trejo 2023, Sociology of Education.
 
 ----------------------------------------------------------------------------------
-Title: Experimental Evidence on Parental Preferences Regarding School Segregation
-Authors: Marissa Thompson & Sam Trejo 
-Date: February 2023
+
+Title: My school district isn't segregated: Experimental evidence on the effect of information on parental preferences regarding school segregation
+Authors: Marissa Thompson &amp; Sam Trejo 
+Date: July 2023
 ReadMe Version: 01 
+
 ----------------------------------------------------------------------------------
 
 This replication package contains data and code to reproduce the analysis, tables, 
@@ -14,7 +16,7 @@ and figures included in the paper.
 
 Instructions: 
 
-Executing the master script (_MASTER.do) will run the analysis and generate all figures and tables. 
+Executing the master script (_MAIN.do) will run the analysis and generate all figures and tables. 
 Prior to running the file, users will need to change the global macros at the top of the 
 Master script. Details on each of the file inputs and outputs can be found below. 
 
@@ -24,7 +26,7 @@ All analyses were run using Stata 17.
 
 Description of do files: 
 
-1. _MASTER.do
+1. _MAIN.do
 	* Input: survey_exp_$date.dta
 	* Output: (runs all other do files, produces all tables and figures) 
 
