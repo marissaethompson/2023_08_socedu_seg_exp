@@ -1,11 +1,8 @@
-******************************
-* Load Data
-******************************
 
-use "${dir}/data/clean/data_analytic_${date}.dta" , clear
+use "${dir}/data/data_analytic_${date}.dta", clear
 
 ********************************************************************************
-* FIGURE 4: DOUBLE BAR GRAPH 
+* Side-by-Sides Vertical Bar Graphs
 ********************************************************************************
 
 ***left panel
@@ -82,10 +79,10 @@ graph combine ///
 	  graphregion(margin(zero)) ysize(8.5) xsize(14)  ///
 	  ycommon
   
-graph export "${figure}/fig4_vbar_$date.png", height(2550) width(4200) replace
+graph export "${figure}/fig4.png", height(2550) width(4200) replace
 
 ********************************************************************************
-* FIGURE A5: DOUBLE BAR GRAPH 
+* Alternative Right Panel Vertical Bar Graph (Appendix)
 ********************************************************************************
 
 ***second histogram ALT
@@ -109,7 +106,7 @@ preserve
 				  mstyle(none) mlabel(diff) mlabpos(6) mlabsize(tiny) ///
 				  mlabcolor(white) mlabformat(%4.2f) 	
 				  
-	graph export "${figure}/figA4_vbar_$date.png", height(2550) width(3300) replace
+	graph export "${figure}/figA4.png", height(2550) width(3300) replace
 	
 restore
 

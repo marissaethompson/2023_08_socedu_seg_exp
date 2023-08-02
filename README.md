@@ -23,48 +23,48 @@ Master script. Details on each of the file inputs and outputs can be found below
 
 Description of do files: 
 
-1. ~MAIN.do
+0. ~MAIN.do
 	* Input: lucid_segregation_survey.dta
 	* Output: (runs all other do files, produces all tables and figures) 
 
-2. A___pca_tabA2.do 
+1.  A___pca_tabA2.do 
 	* Input: lucid_segregation_survey.dta
 	* Data Output: data_analytic_${date}.dta, data_full_${date}.dta
 	* Table Output:	tabA2.csv
 
-3. B___sumstat_tab1.do
+2.  B___sumstat_tab1.do
 	* Input: data_analytic_${date}.dta
 	* Output: tab1.xlsx
 
-4. C___desc_tab2_tab3
+3.  C___desc_tab2_tab3
 	* Input: data_analytic_${date}.dta
 	* Output: tab2.csv, tab3.csv
 
-5. D___effects_tab4_tab5_tabA6_tabA7_tabA8
+4.  D___effects_tab4_tab5_tabA6_tabA7_tabA8
 	* Input: data_analytic_${date}.dta, data_full_${date}.dta
 	* Output: tab4.csv, tab5.csv, tabA6.csv, tabA7.csv, tabA8.csv 
-?
 
+5.  E___coefficient_plots.do
+	* Input: data_analytic_${date}.dta
+	* Output: fig3.png, figA3.png, figA5.png
 
+6.  F___vbar_fig4_figA4.do
+	* Input: data_analytic_${date}.dta
+	* Output: fig4.png, figA4.png
 
+7.  G___hbar_fig5.do
+	* Input: data_analytic_${date}.dta
+	* Output: fig5.png
 
-4. C_coefficient_plots.do
-	* Input: survey_clean_$date.dta
-	* Output: dist_segdiff_coefplot_$date.png (Figure 3)
+8.  H___zip_tabA1_figA1
+	* Input: tl_2019_us_sdu.dta, PDP05_202_USSchoolDistrictAll_119174520887.dta, PDP05_202_USSchoolDistrictAll_11917242922.dta, tl_2019_us_zcta510, grf19_lea_zcta5ce10
+	* Output: tabA1.xlsx, figA1.png
 
-5. D_histograms.do
-	* Input: survey_clean_$date.dta
-	* Output: double_hist_$date.png (Figure 4); diff_hist_full_$date.png (Appendix Figure); quad_hist_$date.png (Appendix Figure)
+9.  I___demo_tabA4
+	* Input: data_analytic_${date}.dta
+	* Output: tabA4.csv
 
-6. E_bar_graphs.do
-	* Input: survey_clean_$date.dta
-	* Output: bar_$date.png (Figure 5)
-
-7. F_regressions.do
-	* Input: survey_clean_$date.dta
-	* Output: control_attitudes_$date (Table 2); reg_guess_$date.csv (Table 3); treatment_effects_$date (Table 4); hetero_treatment_separate_$date.csv (Table 5); treatment_effects_fullsample_$date.csv (Appendix Table); policy_item_treatment_effects_$date (Appendix Table)
-
-8. G_appendix.do
-	* Input: survey_clean_$date.dta
-	* Output: demo_table_$date.csv" (Appendix Table)
+10. J___hist_figA2
+	* Input: data_analytic_${date}.dta
+	* Output: figA2.png
 

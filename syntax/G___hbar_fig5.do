@@ -1,8 +1,5 @@
 
-******************************
-* 
-******************************
-use "${dir}/data/clean/data_analytic_${date.dta}" , clear
+use "${dir}/data/data_analytic_${date}.dta", clear
 
 ******************************
 * 
@@ -120,7 +117,7 @@ twoway bar mn_seg_diff cat ///
 			yscale(reverse) ///
 			legend(off) 
 			
-graph export "${figure}/fig5_hbar_$date.png" ///
+graph export "${figure}/fig5.png" ///
 			 , replace ///
 			 height(3300) ///
 			 width(3000) 
