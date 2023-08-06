@@ -16,24 +16,20 @@ version 17
 clear all
 set more off
 set matsize 5000
-pause on
 
 set scheme burd
+
+capture	graph set window fontface "Calibri Light" 
+capture	graph set window fontface "Calibri-Light" 
 
 ***********************************************************************************
 *** SET DIRECTORY GLOBALS
 ***********************************************************************************
 
-***set home folder
-if "`c(username)'"=="trejo" {
-	glob dir "C:\Users\trejo\Dropbox (Princeton)\Sam\Downloads\2023_08_socedu_seg_exp"
-	graph set window fontface "Calibri Light" 
-}
-
-if "`c(username)'"=="marissathompson" {
-	global dir "/Users/marissathompson/Dropbox/_Research/segregation_experiment"
-	graph set window fontface "Calibri-Light" 
-}
+global dir ..
+cd ${dir}
+pwd
+global dir "`c(pwd)'"
 
 ***set files path globals
 global data "${dir}/data"
@@ -126,27 +122,23 @@ do "$dofile/C___desc_tab2_tab3.do"
 *** Treatment Effect Estimates; Tables 4, 5, A6, A7, & A8
 do "$dofile/D___effects_tab4_tab5_tabA6_tabA7_tabA8.do"
 
-?
-
-
-*** Produce Figure 3 (Coefficient Plots)
-	* Input: data_analytic_${date}.dta
-	* Output: dist_segdiff_coefplot_$date.png (Figure 3)
+*** Coefficient Plots; Figures 3, A3, & A5
 do "$dofile/E___coefplot_fig3_figA3_figA5.do" 
 
-*** Produce Figure 4 (Side-by-side Histograms)
-	* Input: survey_clean_$date.dta
-	* Output: double_hist_$date.png (Figure 4); diff_hist_full_$date.png (Appendix Figure); quad_hist_$date.png (Appendix Figure)
+*** Side-by-Side Vertical Bar Chart; Figures 4 & A4
 do "$dofile/F___vbar_fig4_figA4.do"
 
-*** Produce Figure 5 (Bar Chart)
-	* Input: survey_clean_$date.dta
-	* Output: bar_$date.png (Figure 5)
+*** Horizontal Bar Chart; Figure 5
 do "$dofile/G___hbar_fig5.do"
 
-?
-*** Produce Additional Appendix Tables
-	* Input: survey_clean_$date.dta
-	* Output: demo_table_$date.csv" (Appendix Table)
-do "$dofile/G_appendix.do"
+*** Zip to District Robustness; Table A1, Figure A1
+do "${dofile}/H___zip_tabA1_figA1"
+
+*** Percieved vs. Actual by Demographics; Table A4
+do "$dofile/I___demo_tabA4.do"
+
+*** Histograms; Figure A2
+do "$dofile/J___hist_figA2.do"
+
+
 

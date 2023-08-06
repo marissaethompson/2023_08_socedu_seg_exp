@@ -44,7 +44,7 @@ preserve
 		display "e(Ev)[`i',1]/4"
 	}
 
-	esttab using "${table}/pca_$date.csv", ///
+	esttab using "${table}/tabA2.csv", ///
 		   label plain replace ///
 		   cells("L[Comp1](t fmt(2)) L[Comp2](t) L[Comp3](t) L[Comp4](t)") ///	
 		   mtitle("Attitude Index") ///
