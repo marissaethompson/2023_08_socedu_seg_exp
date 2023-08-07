@@ -28,7 +28,7 @@ replace analytic_sample = 0 if analytic_sample==.
 * General Attitudes (First Group of Variables)
 **********************************************
 
-*pwcorr attitude_1 attitude_2 attitude_3 attitude_4, sig 
+***** Run PCA on 4 attitude variables 
 pca attitude_1 attitude_2 attitude_3 attitude_4 if analytic_sample
 predict attitude_pc, score
 label variable attitude_pc "Attitude Index"
@@ -55,7 +55,7 @@ restore
 * Specific Policies (Second Group of Variables)
 ***********************************************
 
-*pwcorr policy_attendance policy_newschool policy_magnet policy_budget policy_govt , sig 
+***** Run PCA on 5 policy variables 
 pca policy_attendance policy_newschool policy_magnet policy_budget policy_govt if analytic_sample
 predict policy_pc, score
 label variable policy_pc "Policy Index"

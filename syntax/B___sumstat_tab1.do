@@ -51,6 +51,8 @@ desctable i.female age i.hispanic_cat i.race hhi_cont_1000 i.ed_cat i.party i.re
 * T-Tests
 ********************************************************************************
 
+* T-Tests to compare covariates across treatment and control groups 
+
 cls 
 foreach var in  female age hispanic_cat hhi_cont frl_expdiff_frlnfrl perfrl totenrl ncharters ppexp_tot pprev_tot sesavgall {
 	di "`var'"

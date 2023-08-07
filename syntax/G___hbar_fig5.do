@@ -2,12 +2,13 @@
 use "${dir}/data/data_analytic_${date}.dta", clear
 
 ******************************
-* 
+* Bivariate associations between demographic characteristics and differences 
+	* between perceived and actual segregation
 ******************************
 
 local i = -1
 
-*** loop over bar categories
+*** loop over bar categories to create means and confidence intervals 
 foreach group in female race hispanic_cat age_median hhi_median ed_cat party region {
 	preserve
 		*** collapse data by category for bar graph
@@ -37,7 +38,7 @@ foreach group in female race hispanic_cat age_median hhi_median ed_cat party reg
 }
 
 ******************************
-* 
+* FIGURE CREATION
 ******************************
 
 ***append all categories together
@@ -90,15 +91,11 @@ label define lbl_bar ///
 		40 "West" 
 label values cat lbl_bar
 		
-******************************
-* 
-******************************
-
 *** top/bottom code confidence intervals because American Indian is very imprecise		
 replace hi_mn_seg_diff = .8 if hi_mn_seg_diff >.8 & hi_mn_seg_diff !=.	
 replace lo_mn_seg_diff = -.8 if lo_mn_seg_diff <-.8 & lo_mn_seg_diff !=.
 		
-***produce bar graph	
+*** produce bar graph	
 twoway bar mn_seg_diff cat ///
 		   , horizontal ///
 		   lcolor(${color3}%63) fcolor(${color3}%32) ///

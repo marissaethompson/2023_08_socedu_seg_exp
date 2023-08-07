@@ -1,3 +1,6 @@
+***************************************************************************
+*** FIGURE A1 - Accuracy of school district to zip code assignment procedure
+***************************************************************************
 
 *** load district shapefile .dbf [one row for every district]
 use "${data}/census/tl_2019_us_sdu.dta", clear 
@@ -161,7 +164,7 @@ preserve
 	egen districts = count(leaid), by(zip)
 	keep zip zip_parent districts 
 	duplicates drop
-	tab2xl districts [fweight=zip_parent] using "${table}\tabA1", replace row(1) col(1)
+	tab2xl districts [fweight=zip_parent] using "${table}/tabA1", replace row(1) col(1)
 restore
 
 *** keep on the preferred zip - district combination (i.e. the one with the highest fraction of parents)

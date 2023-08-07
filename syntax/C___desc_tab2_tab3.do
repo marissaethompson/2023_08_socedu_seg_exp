@@ -3,10 +3,17 @@
 * TABLE 2
 ******************************************************************************
 
-***
+***** Table 2 displays average levels of attitude and policy indices, by demographic characteristics 
+***** (using only observations from the control group) 
+
+
+******************************
+* Load Data
+******************************
+
 use "${dir}/data/data_analytic_${date}.dta" , clear
 
-keep if treat==0 
+keep if treat==0  // keep only the control group 
 
 gen stat = attitude_std
 gen type = "Attitude Index"
@@ -16,7 +23,7 @@ append using "${dir}/data/data_analytic_${date}.dta"
 replace stat = policy_std if stat == .
 replace type = "Policy Index" if type == ""
 
-***gender
+********************** GENDER
 decode female, generate(female_str)
 
 sort type
@@ -28,7 +35,7 @@ preserve
 	
 	bysort type: eststo: estpost sum stat
 		
-	esttab using "${table}\tab2.csv", ///
+	esttab using "${table}/tab2.csv", ///
 	label nonumber nodepvar noobs plain replace ///
 	cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 	collabels("Mean" "Standard Deviation" "N") ///
@@ -43,13 +50,13 @@ preserve
 	
 	bysort type: eststo: estpost sum stat
 		
-	esttab using "${table}\tab2.csv", ///
+	esttab using "${table}/tab2.csv", ///
 	label nonumber nodepvar noobs nomtitles plain append  ///
 	cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 	collabels(none)
 restore
 
-***race
+********************** RACE
 decode race, generate(race_str)
 replace race_str = "Native American" if race_str == "American Indian / Alaska Native"
 replace race_str = "Asian" if race_str == "Asian / Pacific Islander"
@@ -64,7 +71,7 @@ preserve
 	estimates clear	
 	
 	bysort type: eststo: estpost sum stat
-	esttab using "${table}\tab2.csv", ///
+	esttab using "${table}/tab2.csv", ///
 	label nonumber nodepvar noobs nomtitles plain append  ///
 	cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 	collabels(none) ///
@@ -79,14 +86,14 @@ foreach race in "Black" "American Indian" "Asian" "Other" {
 		estimates clear	
 		
 		bysort type: eststo: estpost sum stat
-		esttab using "${table}\tab2.csv", ///
+		esttab using "${table}/tab2.csv", ///
 		label nonumber nodepvar noobs nomtitles plain append  ///
 		cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 		collabels(none)
 	restore
 }
 
-***ethnicity
+********************** ETHNICITY
 decode hispanic_cat, generate(hispanic_str)
 
 preserve
@@ -96,7 +103,7 @@ preserve
 	estimates clear	
 
 	bysort type: eststo: estpost sum stat
-	esttab using "${table}\tab2.csv", ///
+	esttab using "${table}/tab2.csv", ///
 	label nonumber nodepvar noobs nomtitles plain append  ///
 	cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 	collabels(none) ///
@@ -110,13 +117,13 @@ preserve
 	estimates clear	
 
 	bysort type: eststo: estpost sum stat
-	esttab using "${table}\tab2.csv", ///
+	esttab using "${table}/tab2.csv", ///
 	label nonumber nodepvar noobs nomtitles plain append  ///
 	cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 	collabels(none)
 restore
 
-***age
+**********************  AGE
 decode age_median, generate(age_median_str)
 
 preserve
@@ -126,7 +133,7 @@ preserve
 	estimates clear	
 
 	bysort type: eststo: estpost sum stat
-	esttab using "${table}\tab2.csv", ///
+	esttab using "${table}/tab2.csv", ///
 	label nonumber nodepvar noobs nomtitles plain append  ///
 	cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 	collabels(none) ///
@@ -140,13 +147,13 @@ preserve
 	estimates clear	
 
 	bysort type: eststo: estpost sum stat
-	esttab using "${table}\tab2.csv", ///
+	esttab using "${table}/tab2.csv", ///
 	label nonumber nodepvar noobs nomtitles plain append  ///
 	cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 	collabels(none)
 restore
 
-***income
+********************** INCOME
 decode hhi_median, generate(hhi_median_str)
 
 preserve
@@ -156,7 +163,7 @@ preserve
 	estimates clear	
 
 	bysort type: eststo: estpost sum stat
-	esttab using "${table}\tab2.csv", ///
+	esttab using "${table}/tab2.csv", ///
 	label nonumber nodepvar noobs nomtitles plain append  ///
 	cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 	collabels(none) ///
@@ -170,13 +177,13 @@ preserve
 	estimates clear	
 
 	bysort type: eststo: estpost sum stat
-	esttab using "${table}\tab2.csv", ///
+	esttab using "${table}/tab2.csv", ///
 	label nonumber nodepvar noobs nomtitles plain append  ///
 	cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 	collabels(none)
 restore
 
-***education
+********************** EDUCATION
 decode ed_cat, generate(ed_cat_str)
 
 sort type
@@ -187,7 +194,7 @@ preserve
 	estimates clear	
 	
 	bysort type: eststo: estpost sum stat
-	esttab using "${table}\tab2.csv", ///
+	esttab using "${table}/tab2.csv", ///
 	label nonumber nodepvar noobs nomtitles plain append  ///
 	cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 	collabels(none) ///
@@ -202,14 +209,14 @@ foreach edu in "High School" "2-Year Degree" "4-Year Degree" "Graduate Degree" {
 		estimates clear	
 		
 		bysort type: eststo: estpost sum stat
-		esttab using "${table}\tab2.csv", ///
+		esttab using "${table}/tab2.csv", ///
 		label nonumber nodepvar noobs nomtitles plain append  ///
 		cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 		collabels(none)
 	restore
 }
 
-***political party
+********************** POLITICAL PARTY
 decode party, generate(party_str)
 
 preserve
@@ -219,7 +226,7 @@ preserve
 	estimates clear	
 
 	bysort type: eststo: estpost sum stat
-	esttab using "${table}\tab2.csv", ///
+	esttab using "${table}/tab2.csv", ///
 	label nonumber nodepvar noobs nomtitles plain append  ///
 	cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 	collabels(none) ///
@@ -234,14 +241,14 @@ foreach party in "Republican" "Independent" {
 		estimates clear	
 		
 		bysort type: eststo: estpost sum stat
-		esttab using "${table}\tab2.csv", ///
+		esttab using "${table}/tab2.csv", ///
 		label nonumber nodepvar noobs nomtitles plain append  ///
 		cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 		collabels(none)
 	restore
 }
 
-***region
+********************** REGION
 decode region, generate(region_str)
 
 sort type
@@ -252,7 +259,7 @@ preserve
 	estimates clear	
 	
 	bysort type: eststo: estpost sum stat
-	esttab using "${table}\tab2.csv", ///
+	esttab using "${table}/tab2.csv", ///
 	label nonumber nodepvar noobs nomtitles plain append  ///
 	cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 	collabels(none) ///
@@ -267,7 +274,7 @@ foreach region in "Midwest" "South" "West" {
 		estimates clear	
 		
 		bysort type: eststo: estpost sum stat
-		esttab using "${table}\tab2.csv", ///
+		esttab using "${table}/tab2.csv", ///
 		label nonumber nodepvar noobs nomtitles plain append  ///
 		cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 		collabels(none)
@@ -278,7 +285,9 @@ foreach region in "Midwest" "South" "West" {
 * TABLE 3
 ******************************************************************************
 
-***
+***** Tabulate perceptions of segregation levels across demographic groups 
+***** (using both treatment and control group observations)
+
 use "${dir}/data/data_analytic_${date}.dta" , clear
 
 
@@ -295,7 +304,7 @@ label define lbl_col ///
 	  1 "Difference Between Perceived & Actual Segregation"
 label values type lbl_col 
 
-***gender
+********************** GENDER
 decode female, generate(female_str)
 
 gsort - type
@@ -307,7 +316,7 @@ preserve
 	
 	bysort type: eststo: estpost sum stat
 		
-	esttab using "${table}\tab3.csv", ///
+	esttab using "${table}/tab3.csv", ///
 	label nonumber nodepvar noobs plain replace ///
 	cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 	collabels("Mean" "Standard Deviation" "N") ///
@@ -322,13 +331,13 @@ preserve
 	
 	bysort type: eststo: estpost sum stat
 		
-	esttab using "${table}\tab3.csv", ///
+	esttab using "${table}/tab3.csv", ///
 	label nonumber nodepvar noobs nomtitles plain append  ///
 	cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 	collabels(none)
 restore
 
-***race
+********************** RACE
 decode race, generate(race_str)
 replace race_str = "Native American" if race_str == "American Indian / Alaska Native"
 replace race_str = "Asian" if race_str == "Asian / Pacific Islander"
@@ -343,7 +352,7 @@ preserve
 	estimates clear	
 	
 	bysort type: eststo: estpost sum stat
-	esttab using "${table}\tab3.csv", ///
+	esttab using "${table}/tab3.csv", ///
 	label nonumber nodepvar noobs nomtitles plain append  ///
 	cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 	collabels(none) ///
@@ -358,14 +367,14 @@ foreach race in "Black" "American Indian" "Asian" "Other" {
 		estimates clear	
 		
 		bysort type: eststo: estpost sum stat
-		esttab using "${table}\tab3.csv", ///
+		esttab using "${table}/tab3.csv", ///
 		label nonumber nodepvar noobs nomtitles plain append  ///
 		cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 		collabels(none)
 	restore
 }
 
-***ethnicity
+********************** ETHNICITY
 decode hispanic_cat, generate(hispanic_str)
 
 preserve
@@ -375,7 +384,7 @@ preserve
 	estimates clear	
 
 	bysort type: eststo: estpost sum stat
-	esttab using "${table}\tab3.csv", ///
+	esttab using "${table}/tab3.csv", ///
 	label nonumber nodepvar noobs nomtitles plain append  ///
 	cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 	collabels(none) ///
@@ -389,13 +398,13 @@ preserve
 	estimates clear	
 
 	bysort type: eststo: estpost sum stat
-	esttab using "${table}\tab3.csv", ///
+	esttab using "${table}/tab3.csv", ///
 	label nonumber nodepvar noobs nomtitles plain append  ///
 	cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 	collabels(none)
 restore
 
-***age
+********************** AGE
 decode age_median, generate(age_median_str)
 
 preserve
@@ -405,7 +414,7 @@ preserve
 	estimates clear	
 
 	bysort type: eststo: estpost sum stat
-	esttab using "${table}\tab3.csv", ///
+	esttab using "${table}/tab3.csv", ///
 	label nonumber nodepvar noobs nomtitles plain append  ///
 	cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 	collabels(none) ///
@@ -419,13 +428,13 @@ preserve
 	estimates clear	
 
 	bysort type: eststo: estpost sum stat
-	esttab using "${table}\tab3.csv", ///
+	esttab using "${table}/tab3.csv", ///
 	label nonumber nodepvar noobs nomtitles plain append  ///
 	cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 	collabels(none)
 restore
 
-***income
+********************** INCOME
 decode hhi_median, generate(hhi_median_str)
 
 preserve
@@ -435,7 +444,7 @@ preserve
 	estimates clear	
 
 	bysort type: eststo: estpost sum stat
-	esttab using "${table}\tab3.csv", ///
+	esttab using "${table}/tab3.csv", ///
 	label nonumber nodepvar noobs nomtitles plain append  ///
 	cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 	collabels(none) ///
@@ -449,13 +458,13 @@ preserve
 	estimates clear	
 
 	bysort type: eststo: estpost sum stat
-	esttab using "${table}\tab3.csv", ///
+	esttab using "${table}/tab3.csv", ///
 	label nonumber nodepvar noobs nomtitles plain append  ///
 	cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 	collabels(none)
 restore
 
-***education
+********************** EDUCATION
 decode ed_cat, generate(ed_cat_str)
 
 sort type
@@ -466,7 +475,7 @@ preserve
 	estimates clear	
 	
 	bysort type: eststo: estpost sum stat
-	esttab using "${table}\tab3.csv", ///
+	esttab using "${table}/tab3.csv", ///
 	label nonumber nodepvar noobs nomtitles plain append  ///
 	cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 	collabels(none) ///
@@ -481,14 +490,14 @@ foreach edu in "High School" "2-Year Degree" "4-Year Degree" "Graduate Degree" {
 		estimates clear	
 		
 		bysort type: eststo: estpost sum stat
-		esttab using "${table}\tab3.csv", ///
+		esttab using "${table}/tab3.csv", ///
 		label nonumber nodepvar noobs nomtitles plain append  ///
 		cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 		collabels(none)
 	restore
 }
 
-***political party
+********************** POLITICAL PARTY
 decode party, generate(party_str)
 
 preserve
@@ -498,7 +507,7 @@ preserve
 	estimates clear	
 
 	bysort type: eststo: estpost sum stat
-	esttab using "${table}\tab3.csv", ///
+	esttab using "${table}/tab3.csv", ///
 	label nonumber nodepvar noobs nomtitles plain append  ///
 	cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 	collabels(none) ///
@@ -513,14 +522,14 @@ foreach party in "Republican" "Independent" {
 		estimates clear	
 		
 		bysort type: eststo: estpost sum stat
-		esttab using "${table}\tab3.csv", ///
+		esttab using "${table}/tab3.csv", ///
 		label nonumber nodepvar noobs nomtitles plain append  ///
 		cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 		collabels(none)
 	restore
 }
 
-***region
+********************** REGION
 decode region, generate(region_str)
 
 sort type
@@ -531,7 +540,7 @@ preserve
 	estimates clear	
 	
 	bysort type: eststo: estpost sum stat
-	esttab using "${table}\tab3.csv", ///
+	esttab using "${table}/tab3.csv", ///
 	label nonumber nodepvar noobs nomtitles plain append  ///
 	cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 	collabels(none) ///
@@ -546,7 +555,7 @@ foreach region in "Midwest" "South" "West" {
 		estimates clear	
 		
 		bysort type: eststo: estpost sum stat
-		esttab using "${table}\tab3.csv", ///
+		esttab using "${table}/tab3.csv", ///
 		label nonumber nodepvar noobs nomtitles plain append  ///
 		cells("mean(fmt(2)) sd(fmt(3)) count(fmt(0))") ///
 		collabels(none)

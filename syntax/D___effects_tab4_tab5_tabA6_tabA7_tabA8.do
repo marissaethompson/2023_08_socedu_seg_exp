@@ -127,16 +127,12 @@ label variable seg_diff "Perceived - Actual"
 label variable seg_diff_treat "Treatment X (Perceived - Actual)"
 
 ***dichotomous over/under regressions
-*eststo: reg attitude_std seg_over seg_under seg_over_treat seg_under_treat, noc robust
 eststo: reg attitude_std seg_over seg_under seg_over_treat seg_under_treat i.female i.race i.hispanic_cat age log_inc i.ed_cat i.party i.region perfrl log_enrl ncharters ppexp_tot pprev_tot sesavgall, noc robust
 
-*eststo: reg policy_std seg_over seg_under seg_over_treat seg_under_treat, noc robust
 eststo: reg policy_std seg_over seg_under seg_over_treat seg_under_treat i.female i.race i.hispanic_cat age log_inc i.ed_cat i.party i.region perfrl log_enrl ncharters ppexp_tot pprev_tot sesavgall, noc robust
 
-*eststo: reg minutes_additional seg_over seg_under seg_over_treat seg_under_treat, noc robust
 eststo: reg minutes_additional seg_over seg_under seg_over_treat seg_under_treat i.female i.race i.hispanic_cat age log_inc i.ed_cat i.party i.region perfrl log_enrl ncharters ppexp_tot pprev_tot sesavgall, noc robust
 
-*eststo: reg tax seg_over seg_under seg_over_treat seg_under_treat, noc robust
 eststo: reg tax seg_over seg_under seg_over_treat seg_under_treat i.female i.race i.hispanic_cat age log_inc i.ed_cat i.party i.region perfrl log_enrl ncharters ppexp_tot pprev_tot sesavgall, noc robust
 
 esttab using "${table}/tab5.csv", ///
@@ -150,16 +146,12 @@ esttab using "${table}/tab5.csv", ///
 
 eststo clear
 
-*eststo: reg attitude_std treat seg_diff seg_diff_treat, robust
 eststo: reg attitude_std treat seg_diff seg_diff_treat i.female i.race i.hispanic_cat age log_inc i.ed_cat i.party i.region perfrl log_enrl ncharters ppexp_tot pprev_tot sesavgall, robust
 
-*eststo: reg policy_std treat seg_diff seg_diff_treat, robust
 eststo: reg policy_std treat seg_diff seg_diff_treat i.female i.race i.hispanic_cat age log_inc i.ed_cat i.party i.region perfrl log_enrl ncharters ppexp_tot pprev_tot sesavgall, robust
 
-*eststo: reg minutes_additional treat seg_diff seg_diff_treat, robust
 eststo: reg minutes_additional treat seg_diff seg_diff_treat i.female i.race i.hispanic_cat age log_inc i.ed_cat i.party i.region perfrl log_enrl ncharters ppexp_tot pprev_tot sesavgall, robust
 
-*eststo: reg tax treat seg_diff seg_diff_treat, robust
 eststo: reg tax treat seg_diff seg_diff_treat i.female i.race i.hispanic_cat age log_inc i.ed_cat i.party i.region perfrl log_enrl ncharters ppexp_tot pprev_tot sesavgall, robust
 
 esttab using "${table}/tab5.csv", ///
