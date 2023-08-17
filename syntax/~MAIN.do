@@ -17,25 +17,23 @@ clear all
 set more off
 set matsize 5000
 
-set scheme burd
-
-capture	graph set window fontface "Calibri Light" 
-capture	graph set window fontface "Calibri-Light" 
-
-***********************************************************************************
-*** CHECK FOR (AND PROMPT INSTALLATION OF USER-WRITTEN PACKAGES)
-***********************************************************************************
-
-local packages estout tab2xl desctable center 
+*** CHECK FOR PACKAGES 
+local packages estout tab2xl desctable center scheme-burd coefplot // These packages/schemes must be installed to run the code without errors 
 
 foreach package in `packages' {
 	capture : which `package'
 	if (_rc) {
-		display as result in smcl `"Please install user-written package `package' from SSC in order to run this syntax;"' _newline ///
-			`"You can do so by clicking this link: {stata "ssc install `package'":auto-install `package'}"'
+		display as result in smcl `"Please install user-written package `package' in order to run this syntax;"'
 		exit 199
 	}
 }
+
+
+*** SET GRAPHIC SCHEME 
+
+set scheme burd
+capture	graph set window fontface "Calibri Light" 
+
 
 ***********************************************************************************
 *** SET DIRECTORY GLOBALS
