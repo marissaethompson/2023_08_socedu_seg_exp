@@ -7,6 +7,16 @@
 * Date: 2023
 ********************************************************************************
 
+
+********************************************************************************
+* Package/Scheme Notes: 
+* 	Please install the following packages so that this code runs without errors: 
+* 		estout tab2xl desctable center coefplot
+*  	Please also install scheme-burd 
+********************************************************************************
+
+
+
 ***********************************************************************************
 *** SETUP
 ***********************************************************************************
@@ -18,20 +28,18 @@ set more off
 set matsize 5000
 
 *** CHECK FOR PACKAGES 
-local packages estout tab2xl desctable center scheme-burd coefplot // These packages/schemes must be installed to run the code without errors 
+local packages estout tab2xl desctable center coefplot // These packages must be installed to run the code without errors 
 
 foreach package in `packages' {
 	capture : which `package'
 	if (_rc) {
-		display as result in smcl `"Please install user-written package `package' in order to run this syntax;"'
+		display as result in smcl `"Please install user-written package `package' in order to run this syntax"'
 		exit 199
 	}
 }
 
 
-*** SET GRAPHIC SCHEME 
-
-set scheme burd
+set scheme burd // Must be user installed if not already 
 capture	graph set window fontface "Calibri Light" 
 
 
