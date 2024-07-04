@@ -1,5 +1,7 @@
 # 2023_08_socedu_seg_exp
 
+[![DOI](https://zenodo.org/badge/667588840.svg)](https://zenodo.org/doi/10.5281/zenodo.12646562)
+
 Authors: Marissa Thompson &amp; Sam Trejo
 
 Title: My school district isn't segregated: Experimental evidence on the effect of information on parental preferences regarding school segregation
